@@ -1,0 +1,5 @@
+#ignore reports
+reports/
+mochawesome-reports/
+results/
+node_modules/

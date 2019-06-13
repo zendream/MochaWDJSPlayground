@@ -1,0 +1,22 @@
+{
+  "name": "nodejswebdr",
+  "version": "1.0.0",
+  "description": "node webdriverjs poc",
+  "main": "testdrive/subCall.js",
+  "scripts": {
+    "test": "mocha ./testdrive/main.js --timeout 10000 --reporter mochawesome --reporter-options reportDir=results,reportFilename=result",
+    "start": "node ./testdrive/programmaticalMochaCall.js"
+  },
+  "author": "clink",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chromedriver": "^75.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "mochawesome": "^4.0.0",
+    "properties-reader": "0.0.16"
+  }
+}
