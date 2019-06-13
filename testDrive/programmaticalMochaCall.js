@@ -1,19 +1,19 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const Mocha = require('mocha');
+const Mocha = require('mocha-parallel-tests').default
 
 var testDir = __dirname + '\\testSuites'
 
 var mocha = new Mocha({
     ui: 'bdd',
+    timeout : 10000,
     reporter: 'mochawesome',
     reporterOptions: {
       reportFilename: 'report',
       reportDir: 'results',
-      quiet: true
-    },
-    timeout : 10000
+      quiet: false
+    }
 });
 
 // test specification files from directory
