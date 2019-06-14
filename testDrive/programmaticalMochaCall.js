@@ -7,7 +7,7 @@ var testDir = __dirname + '\\testSuites'
 
 var mocha = new Mocha({
     ui: 'bdd',
-    timeout : 10000,
+    timeout : 15000,
     reporter: 'mochawesome',
     reporterOptions: {
       reportFilename: 'report',
