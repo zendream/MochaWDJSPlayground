@@ -1,45 +1,37 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
-const { expect } = require('chai');
+const fs = require('fs');
+const path = require('path');
+const Mocha = require('mocha-parallel-tests').default;
 
+var envData = require('./env/environments');
+const PropertiesReader = require('properties-reader');
 
+var props = new PropertiesReader(__dirname + '/env/' + envData + '.properties');
 
-describe('DefaultTest', () => {
-    describe('important stuff', () => {
-      const driver = new Builder().forBrowser('chrome').build();
+var testDir = path.join(__dirname, 'testSuites');
+var reportFile = props.get('reporterOptions.reportFilename');
+var reportDir = props.get('reporterOptions.reportDirectory');
+console.log(reportFile);
+console.log(reportDir);
+var mocha = new Mocha({
+    ui: 'bdd',
+    timeout : 15000,
+    reporter: 'mochawesome',
+    reporterOptions: {
+      reportFilename: reportFile,
+      reportDir: reportDir,
+      quiet: false
+    }
+});
 
-      it('should go to www.google.com, search for asdfq and check the title', async () => {
-          await driver.get('https://www.google.com');
-          await driver.findElement(By.name('q')).sendKeys('mochajs', Key.ENTER);
-          await driver.wait(until.elementLocated(By.id('search')));
-          await driver.findElement(By.linkText('Mocha API')).click();
-          const title = await driver.getTitle();
+// test specification files from directory
+var testFiles = fs.readdirSync(testDir).filter(function(file) {
+    // only .js files
+    return path.extname(file) === '.js';
 
-          expect(title).to.equal('Mocha - Documentation');
-      });
-      after(async () => driver.quit());
-    });
-    describe('other stuff done with new session', () => {
-      const driver = new Builder().forBrowser('chrome').build();
-
-      it('should go to www.google.com, search for asdfq and check the title', async () => {
-          await driver.get('https://www.google.com');
-          await driver.findElement(By.name('q')).sendKeys('mochajs', Key.ENTER);
-          await driver.wait(until.elementLocated(By.id('search')));
-          await driver.findElement(By.linkText('Mocha API')).click();
-          const title = await driver.getTitle();
-
-          expect(title).to.equal('Mocha - Documentation');
-      });
-      it('should go to www.google.com, search for asdfq and check the title then fail spectatularly', async () => {
-          await driver.get('https://www.google.com');
-          await driver.findElement(By.name('q')).sendKeys('asdfq', Key.ENTER);
-          await driver.wait(until.elementLocated(By.id('search')));
-          await driver.findElement(By.linkText('asdfq')).click();
-          const title = await driver.getTitle();
-
-          expect(title).to.equal('asdfq');
-      });
-
-      after(async () => driver.quit());
-    });
+}).forEach(function(file) {
+    mocha.addFile(path.join(testDir, file));
+});
+console.log(testDir);
+mocha.run(function(failures) {
+  process.exitCode = failures ? 1 : 0;  //non-zero iff failure
 });

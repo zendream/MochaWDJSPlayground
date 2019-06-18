@@ -4,18 +4,18 @@
   "description": "node webdriverjs poc",
   "main": "testdrive/subCall.js",
   "scripts": {
-    "test": "mocha ./testdrive/main.js --timeout 15000 --reporter mochawesome --reporter-options reportDir=results,reportFilename=result",
-    "start": "node ./testdrive/programmaticalMochaCall.js"
+    "test": "mocha ./testdrive/explicitMocha.js --timeout 15000 --reporter mochawesome --reporter-options reportDir=results,reportFilename=result",
+    "start": "node ./testdrive/main.js"
   },
   "author": "clink",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.2.0",
     "chromedriver": "^75.0.0",
-    "selenium-webdriver": "^4.0.0-alpha.1",
     "mocha": "^6.1.4",
     "mocha-parallel-tests": "^2.2.0",
     "mochawesome": "^4.0.0",
-    "properties-reader": "0.0.16"
+    "properties-reader": "0.0.16",
+    "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }
