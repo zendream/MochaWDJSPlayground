@@ -7,7 +7,6 @@ const PropertiesReader = require('properties-reader');
 
 var props = new PropertiesReader(__dirname + '/env/' + envData + '.properties');
 process.env.path += ';' + path.join(__dirname, 'driverBinaries');
-console.log("DERP  " + process.env.path);
 var testDir = path.join(__dirname, 'testSuites');
 
 var mocha = new Mocha({
@@ -15,8 +14,8 @@ var mocha = new Mocha({
     timeout : 15000,
     reporter: 'mochawesome',
     reporterOptions: {
-      reportFilename: String(props.get('reporterOptions.reportFilename')),//reportFile,
-      reportDir: String(props.get('reporterOptions.reportDirectory')),//reportDir,
+      reportFilename: props.get('reporterOptions.reportFilename'),
+      reportDir: props.get('reporterOptions.reportDirectory'),
       quiet: props.get('reporterOptions.quiet'),
       html: props.get('reporterOptions.html'),
       json: props.get('reporterOptions.json')
