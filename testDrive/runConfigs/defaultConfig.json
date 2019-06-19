@@ -8,18 +8,8 @@
           "testsOne.js"
           ],
         "browser": "chrome",
-        "sizeX": 640,
-        "sizeY": 480
-      },
-      {
-        "runDescription": "loginTests and testsOne with chrome 800*600",
-        "testFiles": [
-          "loginTests.js",
-          "testsOne.js"
-          ],
-        "browser": "chrome",
         "sizeX": 800,
-        "sizeY": 500
+        "sizeY": 600
       },
       {
         "runDescription": "loginTests and testsOne with chrome 800*600",
@@ -29,17 +19,7 @@
           ],
         "browser": "chrome",
         "sizeX": 1024,
-        "sizeY": 780
-      },
-      {
-        "runDescription": "loginTests and testsOne with chrome 800*600",
-        "testFiles": [
-          "loginTests.js",
-          "testsOne.js"
-          ],
-        "browser": "chrome",
-        "sizeX": 1200,
-        "sizeY": 800
+        "sizeY": 768
       }
     ]
 }

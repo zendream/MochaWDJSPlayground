@@ -53,9 +53,10 @@ function runTests(paths) {
   var mocha = new MochaParallel({
       ui: 'bdd',
       timeout : props.get('mochaOptions.timeout'),
-      maxParallel : 1,
+      maxParallel : 2,
       reporter: 'mochawesome',
       reporterOptions: {
+        overwrite: false,
         reportFilename: props.get('reporterOptions.reportFilename'),
         reportDir: props.get('reporterOptions.reportDirectory'),
         quiet: props.get('reporterOptions.quiet'),
