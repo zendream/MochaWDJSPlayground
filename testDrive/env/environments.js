@@ -1,3 +1,4 @@
+//parse "env" parameter from process arguments
 process.argv.forEach(function (val, index, array) {
     var arg = val.split("=");
     if (arg.length > 0) {

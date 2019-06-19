@@ -1,9 +1,9 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
-
+var {getDriver, buildDriver} = require('../driver/driverGen');
 
 describe('loginTests', () => {
-      const driver = new Builder().forBrowser('chrome').build();
+      const driver = buildDriver();
 
       const mainUrl = 'http://the-internet.herokuapp.com/';
 
@@ -25,7 +25,7 @@ describe('loginTests', () => {
           var title = await driver.getTitle();
           expect(title).to.equal('The Internet');
       });
-      
+
       it('should go to the internet and NOT login successfuly with invalid credentials', async () => {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();

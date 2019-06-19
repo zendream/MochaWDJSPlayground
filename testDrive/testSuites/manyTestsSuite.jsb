@@ -1,5 +1,6 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
+var {getDriver, buildDriver} = require('../driver/driverGen');
 
 
 describe('logintests on steroids', () => {
