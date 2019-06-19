@@ -1,14 +1,15 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
-var {getDriver, buildDriver} = require('../driver/driverGen');
+var {getDriver, buildDriver, buildDriverFromConf} = require('../driver/driverGen');
 
 
 describe('logintests on steroids', () => {
-      const driver = new Builder().forBrowser('chrome').build();
+      const driver = buildDriverFromConf();
 
       const mainUrl = 'http://the-internet.herokuapp.com/';
 
       it('should go to the internet and login successfuly through login form', async () => {
+          console.log('Lottastuff ' + process.env.browser + " " + process.env.sizeX + " " + process.env.sizeY)
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
           await driver.findElement(By.name('username')).sendKeys('tomsmith');

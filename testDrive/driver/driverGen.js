@@ -41,5 +41,10 @@ var buildDriver = function(browser, sizex, sizey) {
   }
 };
 
+var buildDriverFromConf = function () {
+  return buildDriver(process.env.browser, parseInt(process.env.sizeX), parseInt(process.env.sizeY));
+};
+
 module.exports.getDriver = getDriver;
+module.exports.buildDriverFromConf = buildDriverFromConf;
 module.exports.buildDriver = buildDriver;
