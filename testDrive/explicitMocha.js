@@ -1,11 +1,12 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
+var {getDriver, buildDriver} = require('./driver/driverGen');
 
 
 
 describe('DefaultTest', () => {
     describe('important stuff', () => {
-      const driver = new Builder().forBrowser('chrome').build();
+      const driver = buildDriver('chrome', 1024,860);
 
       it('should go to www.google.com, search for mochajs and check the title', async () => {
           await driver.get('https://www.google.com');
@@ -19,7 +20,7 @@ describe('DefaultTest', () => {
       after(async () => driver.quit());
     });
     describe('other stuff done with new session', () => {
-      const driver = new Builder().forBrowser('chrome').build();
+      const driver = buildDriver('chrome', 1900,1080);
 
       it('should go to www.google.com, search for mochajs and check the title', async () => {
           await driver.get('https://www.google.com');
