@@ -23,7 +23,7 @@ var expandedConfigs = function(){
     //console.log('Found browser + ' + browser);
     runConfig.resolutions.forEach( resolution => {
         //console.log('Found resolution + ' + resolution.height + "*" + resolution.width);
-        params.push({"browser": browser, "height": resolution.height, "width": resolution.width});
+        params.push({"browser": browser, "height": resolution.height, "width": resolution.width, "headless" : runConfig.headless});
     });
   });
   return params;

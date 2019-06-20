@@ -34,6 +34,7 @@ function runTests(paths) {
       reporter: 'mochawesome',
       reporterOptions: {
         reportFilename: envProps.get('reporterOptions.reportFilename'),
+        overwrite: envProps.get('reporterOptions.overwrite'),
         reportDir: envProps.get('reporterOptions.reportDirectory'),
         quiet: envProps.get('reporterOptions.quiet'),
         html: envProps.get('reporterOptions.html'),

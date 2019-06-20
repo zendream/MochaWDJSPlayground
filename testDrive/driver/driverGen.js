@@ -1,4 +1,7 @@
-var {Builder, By, until} = require('selenium-webdriver');
+var {Builder, By, until, Options, Capabilities} = require('selenium-webdriver');
+var chrome = require('selenium-webdriver/chrome');
+var firefox = require('selenium-webdriver/firefox');
+
 var driver;
 
 var getDriver = function() {
@@ -9,15 +12,30 @@ var getDriver = function() {
     return driver;
   }
 };
-
-var buildDriver = function(browser, sizex, sizey) {
+//TODO headless for other browsers
+var buildDriver = function(browser, sizex, sizey, headless) {
   var sx = Object.is(sizex, undefined) ? 1920 : sizex;
   var sy = Object.is(sizey, undefined) ? 1080 : sizey;
+  var rdriver;
   switch(browser) {
     case 'chrome':
-      rdriver = new Builder().forBrowser("chrome").build();
-      rdriver.manage().window().setRect({width: sx, height: sy});
-      return rdriver;
+      if (headless){
+        var capabilities = Capabilities.chrome();
+        capabilities.set("goog:chromeOptions", {
+          args: [
+              "--lang=en",
+              "--headless",
+              `--window-size=${sx},${sy}`
+          ]
+        });
+        rdriver = new Builder().forBrowser("chrome").withCapabilities(capabilities).build();
+        return rdriver;
+      }
+      else {
+        rdriver = new Builder().forBrowser("chrome").build();
+        rdriver.manage().window().setRect({width: sx, height: sy});
+        return rdriver;
+      }
     case 'firefox':
       rdriver = new Builder().forBrowser("firefox").build();
       rdriver.manage().window().setRect({width: sx, height: sy});
