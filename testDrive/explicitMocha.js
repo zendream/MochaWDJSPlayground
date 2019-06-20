@@ -3,7 +3,6 @@ const { expect } = require('chai');
 var {getDriver, buildDriver} = require('./driver/driverGen');
 
 
-
 describe('DefaultTest', () => {
     describe('important stuff', () => {
       const driver = buildDriver('chrome', 1024,860);
@@ -19,6 +18,7 @@ describe('DefaultTest', () => {
       });
       after(async () => driver.quit());
     });
+    
     describe('other stuff done with new session', () => {
       const driver = buildDriver('chrome', 1900,1080);
 
@@ -43,4 +43,5 @@ describe('DefaultTest', () => {
 
       after(async () => driver.quit());
     });
+  
 });

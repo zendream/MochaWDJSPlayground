@@ -5,17 +5,17 @@
         "runDescription": "loginTests and testsOne with chrome 800*600",
         "testFiles": [
           "loginTests.js",
-          "testsOne.js"
+          "testOne.js"
           ],
         "browser": "chrome",
         "sizeX": 800,
         "sizeY": 600
       },
       {
-        "runDescription": "loginTests and testsOne with chrome 800*600",
+        "runDescription": "loginTests and testsOne with chrome 1024*768",
         "testFiles": [
           "loginTests.js",
-          "testsOne.js"
+          "testOne.js"
           ],
         "browser": "chrome",
         "sizeX": 1024,

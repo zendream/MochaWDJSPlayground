@@ -44,9 +44,12 @@ function runTests(paths) {
       }
   });
   // test specification files from directory
+ 
   paths.forEach(function(path) {
       mocha.addFile(path);
   });
+ 
+ 
 
   mocha.run(function(failures) {
     process.exitCode = failures ? 1 : 0;  //non-zero iff failure
