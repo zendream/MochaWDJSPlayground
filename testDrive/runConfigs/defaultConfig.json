@@ -1,25 +1,22 @@
 {
-    "configName": "Default test configuration loginTests and testsOne twice, with 800*600 chrome and 1024*768",
-    "sets": [
+    "configDescription": "Default test configuration loginTests and testsOne, chrome and firefox on 800*600 and 1920*1080",
+    "testFiles": [
+      "loginTests.js",
+      "testsOne.js",
+      "manyTestsSuite.js"
+    ],
+    "browsers": [
+      "chrome",
+      "firefox"
+    ],
+    "resolutions": [
       {
-        "runDescription": "loginTests and testsOne with chrome 800*600",
-        "testFiles": [
-          "loginTests.js",
-          "testsOne.js"
-          ],
-        "browser": "chrome",
-        "sizeX": 800,
-        "sizeY": 600
+        "height": 800,
+        "width": 600
       },
       {
-        "runDescription": "loginTests and testsOne with chrome 800*600",
-        "testFiles": [
-          "loginTests.js",
-          "testsOne.js"
-          ],
-        "browser": "chrome",
-        "sizeX": 1024,
-        "sizeY": 768
+        "height": 1920,
+        "width": 1080
       }
     ]
 }
