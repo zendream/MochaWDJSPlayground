@@ -37,9 +37,20 @@ var buildDriver = function(browser, sizex, sizey, headless) {
         return rdriver;
       }
     case 'firefox':
-      rdriver = new Builder().forBrowser("firefox").build();
-      rdriver.manage().window().setRect({width: sx, height: sy});
-      return rdriver;
+      if (headless){
+        var options = new firefox.Options();
+        options.addArguments("-headless",
+            `-height=${sx}`,
+            `-width=${sy}`
+        );
+        rdriver = new Builder().forBrowser("firefox").setFirefoxOptions(options).build();
+        return rdriver;
+      }
+      else {
+        rdriver = new Builder().forBrowser("firefox").build();
+        rdriver.manage().window().setRect({width: sx, height: sy});
+        return rdriver;
+    }
     case 'internet_explorer':
       rdriver = new Builder().forBrowser("internet_explorer").build();
       rdriver.manage().window().setRect({width: sx, height: sy});
