@@ -1,8 +1,7 @@
 {
     "configDescription": "Headless run with chrome and firefox",
     "testFiles": [
-      "loginTests.js",
-      "loginTestsPageObjects.js"
+      "loginTests.js"
     ],
     "browsers": [
       "chrome",
