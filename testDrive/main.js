@@ -23,18 +23,8 @@ var paths = [];
 Config.getConfigFiles().forEach(function(file) {
         paths.push(path.join(testDir, file));
 });
-
-paths.forEach(path => {
-  console.log('Found testfile in config - ' + path);
-});
-console.log("Browsers: " + Config.parsedConfig.browsers);
-Config.parsedConfig.resolutions.forEach(res => {
-  console.log('Found resolution in config - ' + res.height + " * " + res.width);
-});
-if(Config.headless){
-  console.log("Config specifies headless mode!");
-}
 //
+console.log(Config.configDetailsToString());
 
 runTests(paths);
 //run tests for each specified set

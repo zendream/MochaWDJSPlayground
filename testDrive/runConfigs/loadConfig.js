@@ -31,15 +31,25 @@ class loadConfig {
   //expand configs to return an array of objects {browser: string, height:number, width: number, headless: bool}
   getBrowserConfigs() {
     var params = [];
-    console.log('Expanding config combination - headless mode:' + this.parsedConfig.headless);
+    //console.log('Expanding config combination - headless mode:' + this.parsedConfig.headless);
     this.parsedConfig.browsers.forEach( browser => {
-      console.log('Found browser + ' + browser);
+      //console.log('Found browser + ' + browser);
       this.parsedConfig.resolutions.forEach( resolution => {
-          console.log('Found resolution + ' + resolution.height + "*" + resolution.width);
+          //console.log('Found resolution + ' + resolution.height + "*" + resolution.width);
           params.push({"browser": browser, "height": resolution.height, "width": resolution.width, "headless" : this.parsedConfig.headless});
       });
     });
     return params;
+  }
+  configDetailsToString() {
+    var res = "Mode:" + (this.parsedConfig.headless ? 'headless' : 'normal') + ", browsers:";
+    this.parsedConfig.browsers.forEach( browser => {
+      res += ' ' + browser;
+    });
+    res += ', resolutions:'
+    this.parsedConfig.resolutions.forEach( resolution => {
+        res += ' ' + resolution.height + '*' + resolution.width;});
+    return res;
   }
 }
 module.exports = new loadConfig();
