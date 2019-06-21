@@ -5,14 +5,15 @@ var BasePage = require('./base-page');
 class LoginPage extends BasePage{
   constructor(webdriver, url){
     super(webdriver, url)
+    //array of locators on particular page(here it is login page)
     this.locators = {
         //locator for username input bar 
         username: By.id('username'),
         //locator for username input bar
         password: By.id('password'),
-        //locator for login button
+        
         loginButton: By.xpath('//*[@id="login"]/button/i'),
-        //locator for logout button
+        
         logoutButton: By.xpath('//*[@id="content"]/div/a/i'),
     }
   }
@@ -29,7 +30,7 @@ class LoginPage extends BasePage{
   }
 
   async logout(){
-      await this.waitFor(this.locators.logoutButton, 10000);
+      //await this.waitFor(this.locators.logoutButton, 10000);
       return this.clickIfClickable(this.locators.logoutButton,10000);
   }
 

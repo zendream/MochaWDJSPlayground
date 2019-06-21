@@ -19,7 +19,8 @@ describe('loginTests', () => {
         await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
         await this.loginPage.login('tomsmith', 'SuperSecretPassword!');
         await this.loginPage.waitFor(this.loginPage.locators.logoutButton, mainWait);
-         
+        var button =  driver.findElement(By.xpath('//*[@id="content"]/div/a/i'));
+        console.log(button.getRect());
         await driver.findElement(By.xpath('//*[@id="flash"]'))
             .getAttribute("class")
             .then(
