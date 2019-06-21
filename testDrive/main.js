@@ -2,36 +2,52 @@ const fs = require('fs');
 const path = require('path');
 const Mocha = require('mocha-parallel-tests').default;
 
-var envData = require('./env/environments');
-const PropertiesReader = require('properties-reader');
+//environment properties and run config from files
+const envProps = require('./env/loadProps.js').props;
+const config = require('./runConfigs/loadConfig.js').config;
 
-var props = new PropertiesReader(__dirname + '/env/' + envData + '.properties');
+//add driver binaries folder to temporary PATH
 process.env.path += ';' + path.join(__dirname, 'driverBinaries');
+
+console.log('Config description: ' + config.configName);
+
 var testDir = path.join(__dirname, 'testSuites');
+var paths = [];
 
-var mocha = new Mocha({
-    ui: 'bdd',
-    timeout : 15000,
-    reporter: 'mochawesome',
-    reporterOptions: {
-      reportFilename: props.get('reporterOptions.reportFilename'),
-      reportDir: props.get('reporterOptions.reportDirectory'),
-      quiet: props.get('reporterOptions.quiet'),
-      html: props.get('reporterOptions.html'),
-      json: props.get('reporterOptions.json')
-
-    }
+config.testFiles.forEach(function(file) {
+        paths.push(path.join(testDir, file));
 });
 
-// test specification files from directory
-var testFiles = fs.readdirSync(testDir).filter(function(file) {
-    // only .js files
-    return path.extname(file) === '.js';
+paths.forEach(path => {
+  console.log('Adding path of testfile - ' + path);
+});
+//
 
-}).forEach(function(file) {
-    mocha.addFile(path.join(testDir, file));
-});
-console.log(testDir);
-mocha.run(function(failures) {
-  process.exitCode = failures ? 1 : 0;  //non-zero iff failure
-});
+runTests(paths);
+//run tests for each specified set
+var fail = 0;
+function runTests(paths) {
+  var mocha = new Mocha({
+      ui: 'bdd',
+      timeout : envProps.get('mochaOptions.timeout'),
+      maxParallel: envProps.get('mochaOptions.maxParallel'),
+      reporter: 'mochawesome',
+      reporterOptions: {
+        reportFilename: envProps.get('reporterOptions.reportFilename'),
+        overwrite: envProps.get('reporterOptions.overwrite'),
+        reportDir: envProps.get('reporterOptions.reportDirectory'),
+        quiet: envProps.get('reporterOptions.quiet'),
+        html: envProps.get('reporterOptions.html'),
+        json: envProps.get('reporterOptions.json')
+
+      }
+  });
+  // test specification files from directory
+  paths.forEach(function(path) {
+      mocha.addFile(path);
+  });
+
+  mocha.run(function(failures) {
+    process.exitCode = failures ? 1 : 0;  //non-zero iff failure
+  });
+}

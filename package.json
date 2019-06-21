@@ -17,5 +17,8 @@
     "mochawesome": "^4.0.0",
     "properties-reader": "0.0.16",
     "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "mocha-param": "^2.0.0"
   }
 }
