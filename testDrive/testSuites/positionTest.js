@@ -11,7 +11,7 @@ describe('loginTests', () => {
       const mainWait = 10000;
       this.loginPage = new LoginPage(driver, mainUrl);
 
-      it('should go to the internet and login successfuly through login form', async () => { 
+      it('should go to the internet and output position of login button', async () => { 
         console.log('Logint1 I wonder what stuff I have now ' + process.env.browser + " " + process.env.sizeX + " " + process.env.sizeY);
         //open main url and choose Form authentication option, than log in and wait for 
         //logout button to be displayed
@@ -20,9 +20,47 @@ describe('loginTests', () => {
         
         await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
        
-       var rectButton = await this.loginPage.getLocation(this.loginPage.locators.username,100000);
-       console.log(rectButton);
+        var rectButton = await this.loginPage.getLocation(this.loginPage.locators.loginButton,100000);
+        console.log(rectButton);
+          
       });
+
+      it('should go to the internet check "Login Page" title', async () => { 
+        console.log('Logint1 I wonder what stuff I have now ' + process.env.browser + " " + process.env.sizeX + " " + process.env.sizeY);
+
+        await this.loginPage.open();
+        await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
+        await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
+
+        var text = await this.loginPage.getDisplayedText(By.xpath('//*[@id="content"]/div/h2'), mainWait);
+        expect(text).to.equal('Login Page');
+
+      });
+
+      it('should go to the internet check login button text', async () => { 
+        console.log('Logint1 I wonder what stuff I have now ' + process.env.browser + " " + process.env.sizeX + " " + process.env.sizeY);
+
+        await this.loginPage.open();
+        await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
+        await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
+
+        var text = await this.loginPage.getDisplayedText(this.loginPage.locators.loginButton, mainWait);
+        expect(text).to.equal('Login');
+
+      });
+
+      it('should go to the internet check login button text and fail', async () => { 
+        console.log('Logint1 I wonder what stuff I have now ' + process.env.browser + " " + process.env.sizeX + " " + process.env.sizeY);
+
+        await this.loginPage.open();
+        await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
+        await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
+
+        var text = await this.loginPage.getDisplayedText(this.loginPage.locators.loginButton, mainWait);
+        expect(text).to.equal('Definitely not login button');
+
+      });
+        
       after(async () => driver.quit());
     });
     

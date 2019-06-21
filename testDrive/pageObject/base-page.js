@@ -33,7 +33,8 @@ class BasePage{
     return this.driver.findElement(locator).click();
   }
 
-  //return array of position and size of element as
+  //Returns an object describing an element's location, in pixels relative 
+  //to the document element, and the element's size in pixels as
   //{height: num, width: num, x: num, y:num}
   async getLocation(locator, timeout){
     var waitTimeout = timeout || 10000;
@@ -43,6 +44,14 @@ class BasePage{
       return params;
     });
     return location;
+  }
+
+  async getDisplayedText(locator, timeout){
+    var waitTimeout = timeout || 10000;
+    await this.waitFor(locator, waitTimeout);
+    var element = await this.driver.findElement(locator, waitTimeout);
+    var currentText = await element.getText().then((text) => {return text;});
+    return currentText;
   }
 
 }
