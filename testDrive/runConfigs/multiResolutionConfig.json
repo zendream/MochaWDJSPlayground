@@ -1,7 +1,6 @@
 {
-    "configDescription": "Default test configuration loginTests and testsOne, chrome and firefox on 800*600 and 1920*1080",
+    "configDescription": "Headless run with chrome and firefox",
     "testFiles": [
-      "loginTests.js",
       "loginTestsPageObjects.js"
     ],
     "browsers": [
@@ -10,8 +9,16 @@
     ],
     "resolutions": [
       {
+        "height": 640,
+        "width": 480
+      },
+      {
         "height": 800,
         "width": 600
+      },
+      {
+        "height": 1024,
+        "width": 768
       },
       {
         "height": 1920,

@@ -18,7 +18,7 @@ module.exports.config = runConfig;
 //expand configs to return an array of objects {browser: string, height:number, width: number}
 var expandedConfigs = function(){
   var params = [];
-  //console.log('Expanding config combination');
+  //console.log('Expanding config combination - headless mode:' + runConfig.headless);
   runConfig.browsers.forEach( browser => {
     //console.log('Found browser + ' + browser);
     runConfig.resolutions.forEach( resolution => {

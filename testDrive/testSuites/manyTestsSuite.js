@@ -8,7 +8,7 @@ describe('loginTests', () => {
 
       const mainUrl = 'http://the-internet.herokuapp.com/';
       itParam("should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildDriver(config.browser, config.height, config.width);
+        const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -33,7 +33,7 @@ describe('loginTests', () => {
       });
 
       itParam("should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildDriver(config.browser, config.height, config.width);
+          const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();
@@ -55,7 +55,7 @@ describe('loginTests', () => {
           }
       });
       itParam("2should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildDriver(config.browser, config.height, config.width);
+        const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -80,7 +80,7 @@ describe('loginTests', () => {
       });
 
       itParam("2should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildDriver(config.browser, config.height, config.width);
+          const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();
@@ -102,7 +102,7 @@ describe('loginTests', () => {
           }
       });
       itParam("3should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildDriver(config.browser, config.height, config.width);
+        const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -127,7 +127,7 @@ describe('loginTests', () => {
       });
 
       itParam("3should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildDriver(config.browser, config.height, config.width);
+          const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();
@@ -149,7 +149,7 @@ describe('loginTests', () => {
           }
       });
       itParam("4should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildDriver(config.browser, config.height, config.width);
+        const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -174,7 +174,7 @@ describe('loginTests', () => {
       });
 
       itParam("4should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildDriver(config.browser, config.height, config.width);
+          const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();
@@ -196,7 +196,7 @@ describe('loginTests', () => {
           }
       });
       itParam("5should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildDriver(config.browser, config.height, config.width);
+        const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -221,7 +221,7 @@ describe('loginTests', () => {
       });
 
       itParam("5should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildDriver(config.browser, config.height, config.width);
+          const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();
@@ -243,7 +243,7 @@ describe('loginTests', () => {
           }
       });
       itParam("6should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildDriver(config.browser, config.height, config.width);
+        const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -268,7 +268,7 @@ describe('loginTests', () => {
       });
 
       itParam("6should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildDriver(config.browser, config.height, config.width);
+          const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();

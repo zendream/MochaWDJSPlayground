@@ -9,7 +9,7 @@ const config = require('./runConfigs/loadConfig.js').config;
 //add driver binaries folder to temporary PATH
 process.env.path += ';' + path.join(__dirname, 'driverBinaries');
 
-console.log('Config description: ' + config.configName);
+console.log('Config description: ' + config.configDescription);
 
 var testDir = path.join(__dirname, 'testSuites');
 var paths = [];
@@ -19,8 +19,15 @@ config.testFiles.forEach(function(file) {
 });
 
 paths.forEach(path => {
-  console.log('Adding path of testfile - ' + path);
+  console.log('Found testfile in config - ' + path);
 });
+console.log("Browsers: " + config.browsers);
+config.resolutions.forEach(res => {
+  console.log('Found resolution in config - ' + res.height + " * " + res.width);
+});
+if(config.headless){
+  console.log("Config specifies headless mode!");
+}
 //
 
 runTests(paths);
