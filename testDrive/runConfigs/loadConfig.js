@@ -6,7 +6,7 @@ var runConfigfile = process.env.runConfigfile
 //environment data to argument from text properties, default 'dev'
 
 class loadConfig {
-  constructor(){
+  constructor() {
     //if the tstconfig parameter was not passed, use the default run configuration
     if (runConfigfile == null){
       console.log('Parameter tstconfig not found, using default suite config');
@@ -21,6 +21,7 @@ class loadConfig {
       throw ('Could not find path from file - ' + filePath);
     }
   }
+
   getConfigFiles() {
     var paths = [];
     this.parsedConfig.testFiles.forEach(function(file) {
