@@ -1,9 +1,7 @@
 {
-    "configName": "Default test configuration loginTests and testsOne, chrome and firefox on 800*600 and 1920*1080",
+    "configDescription": "Default test configuration loginTests and testsOne, chrome and firefox on 800*600 and 1920*1080",
     "testFiles": [
-      "loginTests.js",
-      "testsOne.js",
-      "manyTestsSuite.js"
+      "loginTests.js"
     ],
     "browsers": [
       "chrome",

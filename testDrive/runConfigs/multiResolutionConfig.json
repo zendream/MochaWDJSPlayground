@@ -1,0 +1,29 @@
+{
+    "configDescription": "Headless run with chrome and firefox",
+    "testFiles": [
+      "loginTestsPageObjects.js"
+    ],
+    "browsers": [
+      "chrome",
+      "firefox"
+    ],
+    "resolutions": [
+      {
+        "height": 640,
+        "width": 480
+      },
+      {
+        "height": 800,
+        "width": 600
+      },
+      {
+        "height": 1024,
+        "width": 768
+      },
+      {
+        "height": 1920,
+        "width": 1080
+      }
+    ],
+    "headless": false
+}

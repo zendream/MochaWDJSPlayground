@@ -2,7 +2,9 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 const itParam = require('mocha-param');
 var {getDriver, buildDriver, buildDriverFromConf} = require('../driver/driverGen');
-const configs = require('../runConfigs/loadConfig.js').expandedConfigs;
+const runConfig = require('../runConfigs/loadConfig.js');
+
+var configs = runConfig.getBrowserConfigs();
 
 describe('loginTests', () => {
 
