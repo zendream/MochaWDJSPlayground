@@ -22,16 +22,19 @@ class BasePage{
     return this.driver.wait(until.elementIsVisible(locator, waitTimeout));
   }
 
+
    async waitFor(locator, timeout){
     var waitTimeout = timeout || 10000;
     return this.driver.wait(until.elementLocated(locator), waitTimeout);
   }
+
 
   async clickIfClickable(locator, timeout){
     var waitTimeout = timeout || 10000;
     await this.waitFor(locator, waitTimeout);
     return this.driver.findElement(locator).click();
   }
+
 
   //Returns an object describing an element's location, in pixels relative
   //to the document element, and the element's size in pixels as
@@ -46,6 +49,7 @@ class BasePage{
     return location;
   }
 
+
   async getDisplayedText(locator, timeout){
     var waitTimeout = timeout || 10000;
     await this.waitFor(locator, waitTimeout);
@@ -53,6 +57,20 @@ class BasePage{
     var currentText = await element.getText().then((text) => {return text;});
     return currentText;
   }
+
+
+  async getNormalizedPosition(locator, resolution, timeout, RTL){
+    var currentPosition = await this.getLocation(locator, timeout);
+    var currentPosition = locator;
+     if(RTL){
+       var normalizedPosition = currentPosition;
+       normalizedPosition.x = resolution.x - currentPosition.x;
+       return normalizedPosition;
+     }
+     else{
+       return currentPosition;
+     }
+   }
 
 }
 

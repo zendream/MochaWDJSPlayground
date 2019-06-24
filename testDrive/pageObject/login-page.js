@@ -30,7 +30,7 @@ class LoginPage extends BasePage{
   }
 
   async logout(){
-      //await this.waitFor(this.locators.logoutButton, 10000);
+      await this.waitFor(this.locators.logoutButton, 10000);
       return this.clickIfClickable(this.locators.logoutButton,10000);
   }
 
