@@ -1,8 +1,9 @@
 class Language{
-  //temp shortcuts for supported languages 
-  const supportedLangs = ['en','fr','de','pl','es','ru'];
-  /*
-   *supported RTL languages:
+  constructor(){
+    //temp shortcuts for supported languages 
+    this.supportedLangs = ['en','fr','de','pl','es','ru'];
+    /*
+    supported RTL languages:
     Hebrew (he) - currently supported in Engage
     Pashto (ps)
     Urdu (ur)
@@ -22,11 +23,33 @@ class Language{
     Yiddish (yi)
     Maldivian (dv)
     Arabic (ar) - currently supported in Engage
-  */
-  const rtlLangs = ['he','ps','ur','az','fa','jv','ks','kk','ku','ms','ml','pa','sd','so','tk','ug','yi','dv','ar'];
-  var RTL = false;
-  var defaultLang = 'en';
-
+    */
+    this.rtlLangs = ['he','ps','ur','az','fa','jv','ks','kk','ku','ms','ml','pa','sd','so','tk','ug','yi','dv','ar'];
+    this.defaultRTL = false;
+    this.defaultLang = 'en';
+    this.langShortcut = 2;
+    this.langDelimiter = 'lng=';
+  }
+    
+  static get supportedLangs(){
+    return  this.supportedLangs;
+  }
+  static get rtlLangs(){
+    return this.rtlLangs;
+  } 
+  static get defaultRTL(){
+    return this.defaultRTL;
+  }
+  static get defaultLang(){
+    return this.defaultLang;
+  } 
+  static get langShortcut(){
+    return this.langShortcut;
+  }
+  static get langDelimiter(){
+    return this.langDelimiter;
+  }
+  var tmp = "noirwnovw";
 }
 
 module.exports = Language;

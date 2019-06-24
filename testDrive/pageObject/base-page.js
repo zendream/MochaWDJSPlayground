@@ -1,4 +1,5 @@
 const {until, By} = require('selenium-webdriver');
+const Language = require('../utilities/languages');
 
 class BasePage{
   constructor(webdriver,url) {
@@ -58,7 +59,7 @@ class BasePage{
     return currentText;
   }
 
-
+  //not finall version
   async getNormalizedPosition(locator, resolution, timeout, RTL){
     var currentPosition = await this.getLocation(locator, timeout);
     var currentPosition = locator;
@@ -71,6 +72,38 @@ class BasePage{
        return currentPosition;
      }
    }
+   //get language from url (probably will be updated)
+  async getLanguage(){
+    var url = this.driver.gfetCurrentUrl();
+   
+    if(url.includes(language.langDelimiter)){
+        return url.split(language.langDelimiter).slice(language.langShortcut);
+    }
+    else{
+      return language.defaultLang;
+    }
+  }
+
+  async isRTLLang(lang){
+    this.language = new language();
+    if(this.language.rtlLangs.includes(lang)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  async isSupportedLang(lang){
+    if(true){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
 
 }
 
