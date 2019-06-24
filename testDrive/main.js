@@ -1,67 +1,44 @@
 const fs = require('fs');
 const path = require('path');
-const MochaParallel = require('mocha-parallel-tests').default;
+const Mocha = require('mocha-parallel-tests').default;
+
+//environment properties and run config from files
+const envProps = require('./env/loadProps.js').props;
+const config = require('./runConfigs/loadConfig.js').config;
 
 //add driver binaries folder to temporary PATH
 process.env.path += ';' + path.join(__dirname, 'driverBinaries');
-//environment data to argument from text properties, default 'dev'
-var env = require('./env/args').env;
-if (env == null){
-    env = 'dev'
-}
-const PropertiesReader = require('properties-reader');
-var props = new PropertiesReader(path.join(__dirname , '/env/' , env + '.properties'));
 
-//test config data to argument from config properties, default 'defaultConfig.json'
-var runConfigfile = require('./env/args').tstconfig;
-if (runConfigfile == null){
-    console.log('Using default suite configuration');
-    runConfigfile = 'defaultConfig';
-}
+console.log('Config description: ' + config.configName);
 
-//parse test run configuration from JSON
-var runConfig = JSON.parse(fs.readFileSync(path.join(__dirname , '/runConfigs/' , runConfigfile + '.json')));
-console.log("Suite description - " + runConfig.configName);
+var testDir = path.join(__dirname, 'testSuites');
+var paths = [];
 
+config.testFiles.forEach(function(file) {
+        paths.push(path.join(testDir, file));
+});
+
+paths.forEach(path => {
+  console.log('Adding path of testfile - ' + path);
+});
+//
+
+runTests(paths);
 //run tests for each specified set
 var fail = 0;
-
-const forLoop = async _ => {
-  console.log('Start')
-
-  for (let index = 0; index < runConfig.sets.length; index++) {
-    var paths = [];
-    runConfig.sets[index].testFiles.forEach(filename => {
-      paths.push(path.join(__dirname, 'testSuites', filename));
-    });
-    process.env.browser = runConfig.sets[index].browser;
-    process.env.sizeX = runConfig.sets[index].sizeX;
-    process.env.sizeY = runConfig.sets[index].sizeY;
-    console.log('Config loaded - ' + process.env.browser + ' ' + process.env.sizeX + '*' + process.env.sizeY);
-    console.log('Test suites:');
-    paths.forEach(p=>{console.log('  ' + p);});
-    runTests(paths);
-    fail = fail ? 1 : 0;
-  }
-  console.log('End')
-}
-
-forLoop();
-
 function runTests(paths) {
-  var fail = 0;
-  var mocha = new MochaParallel({
+  var mocha = new Mocha({
       ui: 'bdd',
-      timeout : props.get('mochaOptions.timeout'),
-      maxParallel : 2,
+      timeout : envProps.get('mochaOptions.timeout'),
+      maxParallel: envProps.get('mochaOptions.maxParallel'),
       reporter: 'mochawesome',
       reporterOptions: {
-        overwrite: false,
-        reportFilename: props.get('reporterOptions.reportFilename'),
-        reportDir: props.get('reporterOptions.reportDirectory'),
-        quiet: props.get('reporterOptions.quiet'),
-        html: props.get('reporterOptions.html'),
-        json: props.get('reporterOptions.json')
+        reportFilename: envProps.get('reporterOptions.reportFilename'),
+        overwrite: envProps.get('reporterOptions.overwrite'),
+        reportDir: envProps.get('reporterOptions.reportDirectory'),
+        quiet: envProps.get('reporterOptions.quiet'),
+        html: envProps.get('reporterOptions.html'),
+        json: envProps.get('reporterOptions.json')
 
       }
   });
@@ -71,7 +48,6 @@ function runTests(paths) {
   });
 
   mocha.run(function(failures) {
-    fail = failures ? 1 : 0;  //non-zero iff failure
+    process.exitCode = failures ? 1 : 0;  //non-zero iff failure
   });
-  return fail;
 }

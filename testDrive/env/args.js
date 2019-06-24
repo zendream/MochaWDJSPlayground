@@ -8,7 +8,7 @@ process.argv.forEach(function (val, index, array) {
         }
         if (arg[0] === 'tstconfig') {
             var config = arg[1];
-            module.exports.tstconfig = tstconfig;
+            module.exports.tstconfig = config;
         }
     }
 });
