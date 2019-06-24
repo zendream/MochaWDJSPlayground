@@ -9,7 +9,7 @@ class LoginPage extends BasePage{
     this.locators = {
         //locator for username input bar 
         username: By.id('username'),
-        //locator for username input bar
+        //locator for password input bar
         password: By.id('password'),
         
         loginButton: By.xpath('//*[@id="login"]/button/i'),
@@ -30,7 +30,7 @@ class LoginPage extends BasePage{
   }
 
   async logout(){
-      //await this.waitFor(this.locators.logoutButton, 10000);
+      await this.waitFor(this.locators.logoutButton, 10000);
       return this.clickIfClickable(this.locators.logoutButton,10000);
   }
 
@@ -39,6 +39,8 @@ class LoginPage extends BasePage{
     return expect(title).to.equal(expectedTitle);
 
   }
+
+ 
 }
 
 module.exports = LoginPage;

@@ -1,6 +1,7 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 var {getDriver, buildDriver, buildDriverFromConf} = require('../driver/driverGen');
+//const configs = require('../runConfigs/loadConfig.js').expandedConfigs;
 
 const LoginPage = require('../pageObject/login-page');
 
@@ -20,11 +21,16 @@ describe('loginTests', () => {
         
         await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
        
-        var rectButton = await this.loginPage.getLocation(this.loginPage.locators.loginButton,100000);
+        var rectButton = await this.loginPage.getPosition(this.loginPage.locators.loginButton,100000);
         console.log(rectButton);
+
+       
+      
           
       });
 
+
+      /*
       it('should go to the internet check "Login Page" title', async () => { 
         console.log('Logint1 I wonder what stuff I have now ' + process.env.browser + " " + process.env.sizeX + " " + process.env.sizeY);
 
@@ -32,7 +38,7 @@ describe('loginTests', () => {
         await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
         await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
 
-        var text = await this.loginPage.getDisplayedText(By.xpath('//*[@id="content"]/div/h2'), mainWait);
+        var text = await this.loginPage.getCurrentText(By.xpath('//*[@id="content"]/div/h2'), mainWait);
         expect(text).to.equal('Login Page');
 
       });
@@ -44,7 +50,7 @@ describe('loginTests', () => {
         await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
         await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
 
-        var text = await this.loginPage.getDisplayedText(this.loginPage.locators.loginButton, mainWait);
+        var text = await this.loginPage.getCurrentText(this.loginPage.locators.loginButton, mainWait);
         expect(text).to.equal('Login');
 
       });
@@ -56,10 +62,11 @@ describe('loginTests', () => {
         await this.loginPage.clickIfClickable(By.linkText('Form Authentication'), mainWait);
         await this.loginPage.waitFor(this.loginPage.locators.loginButton, mainWait);
 
-        var text = await this.loginPage.getDisplayedText(this.loginPage.locators.loginButton, mainWait);
+        var text = await this.loginPage.getCurrentText(this.loginPage.locators.loginButton, mainWait);
         expect(text).to.equal('Definitely not login button');
 
       });
+      */
         
       after(async () => driver.quit());
     });

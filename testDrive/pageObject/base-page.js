@@ -36,23 +36,41 @@ class BasePage{
   //Returns an object describing an element's location, in pixels relative 
   //to the document element, and the element's size in pixels as
   //{height: num, width: num, x: num, y:num}
-  async getLocation(locator, timeout){
+  async getPosition(locator, timeout){
     var waitTimeout = timeout || 10000;
     await this.waitFor(locator, waitTimeout);
     var element = await this.driver.findElement(locator, waitTimeout);
-    var location = await element.getRect().then(function(params){
+    var position = await element.getRect().then(function(params){
       return params;
     });
-    return location;
+    return position;
   }
 
-  async getDisplayedText(locator, timeout){
+  async getCurrentText(locator, timeout){
     var waitTimeout = timeout || 10000;
     await this.waitFor(locator, waitTimeout);
     var element = await this.driver.findElement(locator, waitTimeout);
     var currentText = await element.getText().then((text) => {return text;});
     return currentText;
   }
+  
+  async getNormalizedPosition(locator, resolution, timeout, RTL){
+   // var currentPosition = await this.getLocation(locator, timeout);
+   var currentPosition = locator;
+    if(RTL){
+      var normalizedPosition = currentPosition;
+      normalizedPosition.x = resolution.x - currentPosition.x;
+      return normalizedPosition;
+    }
+    else{
+      return currentPosition;
+    }
+  }
+
+
+
+
+
 
 }
 
