@@ -36,6 +36,7 @@ class BasePage{
     return this.driver.findElement(locator).click();
   }
 
+  //###############for work with objects####################
 
   //Returns an object describing an element's location, in pixels relative
   //to the document element, and the element's size in pixels as
@@ -50,7 +51,6 @@ class BasePage{
     return location;
   }
 
-
   async getDisplayedText(locator, timeout){
     var waitTimeout = timeout || 10000;
     await this.waitFor(locator, waitTimeout);
@@ -58,7 +58,6 @@ class BasePage{
     var currentText = await element.getText().then((text) => {return text;});
     return currentText;
   }
-
   //not finall version
   async getNormalizedPosition(locator, resolution, timeout, RTL){
     var currentPosition = await this.getLocation(locator, timeout);
@@ -72,11 +71,13 @@ class BasePage{
        return currentPosition;
      }
    }
+
+   //##################Languages#############################
+
    //get language from url (probably will be updated)
   async getLanguage(url){
     this.language = new Language();
-    //current url or given ?
-    //var url = this.driver.getCurrentUrl();
+    
     if(url.includes(this.language.langDelimiter)){
       //get language as substring based on demo, e.g. ...lng=en... in url
         return url.split(this.language.langDelimiter)[1].substr(0, 2);
@@ -89,23 +90,33 @@ class BasePage{
   async isRTLLang(lang){
     this.language = new Language();
     return this.language.rtlLangs.includes(lang)
-    /*
-    if(this.language.rtlLangs.includes(lang)){
-      return true;
-    }
-    else{
-      return false;
-    }
-    */
   }
 
   async isSupportedLang(lang){
     this.language = new Language();
     return this.language.supportedLangs.includes(lang);
-    
   }
 
-
+  async changeLanguage(newLng, url){
+    if(!await this.isSupportedLang(newLng)){
+      throw new Error('Not supported language');
+    }
+    else{
+      if(!url){
+        url = this.driver.getCurrentUrl();
+      }
+      var currentLng = await this.getLanguage(url);
+      currentLng = 'lng=' + currentLng;
+      newLng = 'lng=' + newLng;
+      if(url.includes(currentLng)){
+        url = url.replace(currentLng, newLng);
+      }
+      else{
+        url = url.concat('/').concat(newLng);
+      }
+      return url;
+    }
+  }
 
 }
 
