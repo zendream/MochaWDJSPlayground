@@ -73,34 +73,36 @@ class BasePage{
      }
    }
    //get language from url (probably will be updated)
-  async getLanguage(){
-    var url = this.driver.gfetCurrentUrl();
-   
-    if(url.includes(language.langDelimiter)){
-        return url.split(language.langDelimiter).slice(language.langShortcut);
+  async getLanguage(url){
+    this.language = new Language();
+    //current url or given ?
+    //var url = this.driver.getCurrentUrl();
+    if(url.includes(this.language.langDelimiter)){
+      //get language as substring based on demo, e.g. ...lng=en... in url
+        return url.split(this.language.langDelimiter)[1].substr(0, 2);
     }
     else{
-      return language.defaultLang;
+      return this.language.defaultLang;
     }
   }
 
   async isRTLLang(lang){
-    this.language = new language();
+    this.language = new Language();
+    return this.language.rtlLangs.includes(lang)
+    /*
     if(this.language.rtlLangs.includes(lang)){
       return true;
     }
     else{
       return false;
     }
+    */
   }
 
   async isSupportedLang(lang){
-    if(true){
-      return true;
-    }
-    else{
-      return false;
-    }
+    this.language = new Language();
+    return this.language.supportedLangs.includes(lang);
+    
   }
 
 

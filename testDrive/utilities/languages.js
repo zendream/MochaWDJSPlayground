@@ -1,7 +1,5 @@
 class Language{
   constructor(){
-    //temp shortcuts for supported languages 
-    this.supportedLangs = ['en','fr','de','pl','es','ru'];
     /*
     supported RTL languages:
     Hebrew (he) - currently supported in Engage
@@ -24,32 +22,15 @@ class Language{
     Maldivian (dv)
     Arabic (ar) - currently supported in Engage
     */
-    this.rtlLangs = ['he','ps','ur','az','fa','jv','ks','kk','ku','ms','ml','pa','sd','so','tk','ug','yi','dv','ar'];
+    this.rtlLangs = ['he', 'ps', 'ur', 'az', 'fa', 'jv', 'ks', 'kk', 'ku', 'ms', 'ml', 'pa', 'sd', 'so', 'tk', 'ug', 'yi', 'dv', 'ar'];
+    //temp shortcuts for supported languages 
+    this.supportedLangs = ['en','fr','de','pl','es','ru'].concat(this.rtlLangs);
     this.defaultRTL = false;
     this.defaultLang = 'en';
     this.langShortcut = 2;
     this.langDelimiter = 'lng=';
   }
-    
-  static get supportedLangs(){
-    return  this.supportedLangs;
-  }
-  static get rtlLangs(){
-    return this.rtlLangs;
-  } 
-  static get defaultRTL(){
-    return this.defaultRTL;
-  }
-  static get defaultLang(){
-    return this.defaultLang;
-  } 
-  static get langShortcut(){
-    return this.langShortcut;
-  }
-  static get langDelimiter(){
-    return this.langDelimiter;
-  }
-  var tmp = "noirwnovw";
+ 
 }
 
 module.exports = Language;
