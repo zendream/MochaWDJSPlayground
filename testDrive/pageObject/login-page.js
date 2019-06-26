@@ -15,6 +15,8 @@ class LoginPage extends BasePage{
         loginButton: By.xpath('//*[@id="login"]/button/i'),
 
         logoutButton: By.xpath('//*[@id="content"]/div/a/i'),
+        forgotPasswordButton: By.xpath(),
+        wrongPasswordMsg: By.xpath(),
     }
   }
 
