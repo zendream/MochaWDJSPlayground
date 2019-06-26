@@ -4,16 +4,11 @@
       "loginTests.js"
     ],
     "browsers": [
-      "chrome",
-      "firefox"
+      "ie"
     ],
     "resolutions": [
       {
-        "height": 800,
-        "width": 600
-      },
-      {
-        "height": 1920,
+        "height": 1900,
         "width": 1080
       }
     ],

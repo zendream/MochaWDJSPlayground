@@ -1,6 +1,7 @@
 var {Builder, By, until, Options, Capabilities} = require('selenium-webdriver');
 var chrome = require('selenium-webdriver/chrome');
 var firefox = require('selenium-webdriver/firefox');
+var ie = require('selenium-webdriver/ie');
 
 var driver;
 
@@ -51,8 +52,21 @@ var buildDriver = function(browser, sizex, sizey, headless) {
         rdriver.manage().window().setRect({width: sx, height: sy});
         return rdriver;
     }
-    case 'internet_explorer':
-      rdriver = new Builder().forBrowser("internet_explorer").build();
+    case 'ie':
+      /*var capabilities = Capabilities.ie();
+      capabilities.set("enablePersistentHover", true);
+      capabilities.set("ensureCleanSession", true);
+      capabilities.set("ignoreZoomSetting", true);
+      capabilities.set("InternetExplorerDriver.NATIVE_EVENTS", false);
+      capabilities.set("requireWindowFocus", true);
+      rdriver = new Builder().forBrowser("ie").withCapabilities(capabilities).build();
+      return rdriver;*/
+      var options = new ie.Options();
+      options.ignoreZoomSetting(true);
+      options.enablePersistentHover(true);
+      options.requireWindowFocus(true);
+      options.ensureCleanSession(true);
+      var rdriver = new Builder().forBrowser("ie").setIeOptions(options).build();
       rdriver.manage().window().setRect({width: sx, height: sy});
       return rdriver;
     case 'edge':

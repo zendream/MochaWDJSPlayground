@@ -12,7 +12,19 @@ describe('loginTests', () => {
       itParam("should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
         const driver = buildDriver(config.browser, config.height, config.width, config.headless);
         try {
+          if (config.browser == 'ie'){
+            await (function () {
+              console.log("spinava promise 1");
+              return new Promise(resolve => setTimeout(resolve, 2000));
+            }());
+          };
           await driver.get(mainUrl);
+          if (config.browser == 'ie'){
+            await (function () {
+              console.log("spinava promise 2");
+              return new Promise(resolve => setTimeout(resolve, 4000));
+            }());
+          };
           await driver.findElement(By.linkText('Form Authentication')).click();
           await driver.findElement(By.name('username')).sendKeys('tomsmith');
           await driver.findElement(By.name('password')).sendKeys('SuperSecretPassword!', Key.ENTER);
@@ -37,7 +49,19 @@ describe('loginTests', () => {
       itParam("should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
           const driver = buildDriver(config.browser, config.height, config.width, config.headless);
           try {
+            if (config.browser == 'ie'){
+              await (function () {
+                console.log("spinava promise 1");
+                return new Promise(resolve => setTimeout(resolve, 2000));
+              }());
+            };
             await driver.get(mainUrl);
+            if (config.browser == 'ie'){
+              await (function () {
+                console.log("spinava promise 2");
+                return new Promise(resolve => setTimeout(resolve, 4000));
+              }());
+            };
             await driver.findElement(By.linkText('Form Authentication')).click();
             await driver.findElement(By.name('username')).sendKeys('joesmith');
             await driver.findElement(By.name('password')).sendKeys('stuff!', Key.ENTER);
