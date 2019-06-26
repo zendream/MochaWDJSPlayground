@@ -97,20 +97,24 @@ class BasePage{
     return this.language.supportedLangs.includes(lang);
   }
 
+  //changes language by modifing url adress as shown in demo
   async changeLanguage(newLng, url){
     if(!await this.isSupportedLang(newLng)){
       throw new Error('Not supported language');
     }
     else{
+      //if url is not given as argument
       if(!url){
         url = this.driver.getCurrentUrl();
       }
       var currentLng = await this.getLanguage(url);
       currentLng = 'lng=' + currentLng;
       newLng = 'lng=' + newLng;
+      //chnages language by replacing it 
       if(url.includes(currentLng)){
         url = url.replace(currentLng, newLng);
       }
+      //default language is not shown, just concat new language to url
       else{
         url = url.concat('/').concat(newLng);
       }
