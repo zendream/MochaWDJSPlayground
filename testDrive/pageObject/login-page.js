@@ -20,11 +20,6 @@ class LoginPage extends BasePage{
     }
   }
 
-  async fillForm(locator, timeout, message){
-    await this.waitFor(locator,timeout);
-    return this.driver.findElement(locator).sendKeys(message);
-  }
-
   async login(name, password){
     await this.fillForm(this.locators.username, 10000, name);
     await this.fillForm(this.locators.password, 10000, password);

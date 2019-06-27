@@ -36,6 +36,10 @@ class BasePage{
     return this.driver.findElement(locator).click();
   }
 
+  async fillForm(locator, timeout, message){
+    await this.waitFor(locator,timeout);
+    return this.driver.findElement(locator).sendKeys(message);
+  }
   //###############for work with objects####################
 
   //Returns an object describing an element's location, in pixels relative
