@@ -13,7 +13,9 @@ class AdminSubsPage extends BasePage{
       addPopupSubStartDate: By.id(''),
       addPopupAddButton: By.id(''),
       addPopupCancelButton: By.id(''),
-      actionButton: By.id(''),
+      actionsButton: By.id(''),
+      tableOfSubs: By.id(''),
+
     }
   }
 
@@ -28,5 +30,6 @@ class AdminSubsPage extends BasePage{
       return this.clickIfClickable(this.locators.addPopupCancelButton,10000);
     }
   }
+
 }
 module.exports = SubsPage;
