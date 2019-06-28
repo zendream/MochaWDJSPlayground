@@ -83,6 +83,65 @@ var buildDriver = function(browser, sizex, sizey, headless) {
       return rdriver;
   }
 };
+var buildRemoteDriverLambdaTest = function () {
+    // username: Username can be found at automation dashboard
+    const USERNAME = 'odvarkajakub';
+
+    // AccessKey:  AccessKey can be generated from automation dashboard or profile section
+    const KEY = 'lj28oKGcuM73HuKp1ihZVnoavUpdOhEsK3osfeO8jldqccj4Wr';
+
+    // gridUrl: gridUrl can be found at automation dashboard
+    const GRID_HOST = 'hub.lambdatest.com/wd/hub';
+    // Setup Input capabilities
+    var capabilities = {
+  		"build" : "build id 2",
+  		"name" : "test run name 2 - win 10 IE 11.0",
+  		"platform" : "Windows 10",
+  		"browserName" : "Internet Explorer",
+  		"version" : "11.0",
+  		"console" : true,
+  		"network" : true,
+  		"visual" : true,
+  		"ie.compatibility" : 11001
+  	}
+
+    // URL: https://{username}:{accessKey}@hub.lambdatest.com/wd/hub
+    const gridUrl = 'https://' + USERNAME + ':' + KEY + '@' + GRID_HOST;
+
+    // setup and build selenium driver object
+    var rdriver = new Builder()
+        .usingServer(gridUrl)
+        .withCapabilities(capabilities)
+        .build();
+
+    return rdriver;
+};
+var buildRemoteDriverBrowserStack = function () {
+    // Setup Input capabilities
+    var capabilities = {
+      'os' : 'OS X',
+      'os_version' : 'Mojave',
+      'browserName' : 'Safari',
+      'browser_version' : '12.0',
+      'browserstack.local' : 'false',
+      'browserstack.debug' : 'true',
+      'browserstack.networkLogs' : 'true',
+      'browserstack.selenium_version' : '3.14.0',
+      'browserstack.user' : 'jakubodvrka1',
+      'browserstack.key' : 'X4mypwaPpmFJESoE5jgh'
+    }
+
+
+
+
+    var rdriver = new Builder()
+    .usingServer('http://hub-cloud.browserstack.com/wd/hub')
+    .withCapabilities(capabilities)
+    .build();
+
+    return rdriver;
+};
+
 
 var buildDriverFromConf = function () {
   return buildDriver(process.env.browser, parseInt(process.env.sizeX), parseInt(process.env.sizeY));
@@ -91,3 +150,5 @@ var buildDriverFromConf = function () {
 module.exports.getDriver = getDriver;
 module.exports.buildDriverFromConf = buildDriverFromConf;
 module.exports.buildDriver = buildDriver;
+module.exports.buildRemoteDriverLambdaTest = buildRemoteDriverLambdaTest;
+module.exports.buildRemoteDriverBrowserStack = buildRemoteDriverBrowserStack;
