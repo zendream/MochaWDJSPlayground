@@ -6,11 +6,11 @@ const runConfig = require('../runConfigs/loadConfig.js');
 
 var configs = runConfig.getBrowserConfigs();
 
-describe('loginTestsRemote', () => {
+describe('loginTestsRemote2', () => {
 
       const mainUrl = 'http://the-internet.herokuapp.com/';
       itParam("should go to the internet and login successfuly through login form - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-        const driver = buildRemoteDriverLambdaTest();
+        const driver = buildRemoteDriverBrowserStack();
         try {
           await driver.get(mainUrl);
           await driver.findElement(By.linkText('Form Authentication')).click();
@@ -34,7 +34,7 @@ describe('loginTestsRemote', () => {
         }
       });
       itParam("should go to the internet and NOT login successfuly with invalid credentials - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
-          const driver = buildRemoteDriverLambdaTest();
+          const driver = buildRemoteDriverBrowserStack();
           try {
             await driver.get(mainUrl);
             await driver.findElement(By.linkText('Form Authentication')).click();

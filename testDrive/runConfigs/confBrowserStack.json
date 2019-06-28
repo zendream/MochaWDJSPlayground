@@ -1,0 +1,16 @@
+{
+    "configDescription": "Login tests on remote 2 - Browser Stack - osX Mojave, safari 12.1",
+    "testFiles": [
+      "loginTestsRemote2.js"
+    ],
+    "browsers": [
+      "ie"
+    ],
+    "resolutions": [
+      {
+        "height": 1900,
+        "width": 1080
+      }
+    ],
+    "headless": false
+}

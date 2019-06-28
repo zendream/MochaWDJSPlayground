@@ -1,0 +1,16 @@
+{
+    "configDescription": "Login tests on remote 1 - LambdaTest - win 10 IE 11.0",
+    "testFiles": [
+      "loginTestsRemote.js"
+    ],
+    "browsers": [
+      "ie"
+    ],
+    "resolutions": [
+      {
+        "height": 1900,
+        "width": 1080
+      }
+    ],
+    "headless": false
+}
