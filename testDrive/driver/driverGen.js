@@ -85,10 +85,10 @@ var buildDriver = function(browser, sizex, sizey, headless) {
 };
 var buildRemoteDriverLambdaTest = function () {
     // username: Username can be found at automation dashboard
-    const USERNAME = 'odvarkajakub';
+    const USERNAME = 'sarvas.sarvas';
 
     // AccessKey:  AccessKey can be generated from automation dashboard or profile section
-    const KEY = 'lj28oKGcuM73HuKp1ihZVnoavUpdOhEsK3osfeO8jldqccj4Wr';
+    const KEY = 'U9ahPu8QWhg222Ng8MDJcHbk0ICETfODmKx2VFYhTfurhist1r';
 
     // gridUrl: gridUrl can be found at automation dashboard
     const GRID_HOST = 'hub.lambdatest.com/wd/hub';
