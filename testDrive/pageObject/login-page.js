@@ -15,12 +15,13 @@ class LoginPage extends BasePage{
         loginButton: By.id('loginButton'),
 
         forgotPassworsButton: By.id('forgotLink'),
-        addSubbButton: By.id('add_subscriber')
+        addSubbButton: By.id('add_subscriber'),
+        errorDetails: By.xpath("//div[@class='errorDetails']")
     }
   }
 
   async fillForm(locator, timeout, message){
-    await this.waitFor(locator,timeout);
+    await this.waitForVisible(locator,timeout);
     return this.driver.findElement(locator).sendKeys(message);
   }
 
@@ -31,8 +32,13 @@ class LoginPage extends BasePage{
   }
 
   async logout(timeout){
-      await this.waitFor(this.locators.logoutButton, timeout);
+      await this.waitForVisible(this.locators.logoutButton, timeout);
       return this.clickIfClickable(this.locators.logoutButton, timeout);
+  }
+
+  async getVisibleError(timeout){
+    await this.waitForVisible(this.locators.errorDetails, timeout);
+    return this.getDisplayedText(this.locators.errorDetails, timeout);
   }
 
   async titleIsEqual(expectedTitle){

@@ -1,4 +1,4 @@
-const {until, By} = require('selenium-webdriver');
+const {until, By, Condition} = require('selenium-webdriver');
 
 class BasePage{
   constructor(webdriver,url) {
@@ -17,19 +17,20 @@ class BasePage{
     return this;
   }
 
-  async isVisible(locator, timeout){
+  async waitForVisible(locator, timeout){
     var waitTimeout = timeout || 10000;
-    return this.driver.wait(until.elementIsVisible(locator, waitTimeout));
+    return this.driver.wait(until.elementIsVisible(this.driver.findElement(locator, timeout), waitTimeout));
   }
 
-   async waitFor(locator, timeout){
+  async waitForLocated(locator, timeout){
     var waitTimeout = timeout || 10000;
     return this.driver.wait(until.elementLocated(locator), waitTimeout);
   }
 
+
   async clickIfClickable(locator, timeout){
     var waitTimeout = timeout || 10000;
-    await this.waitFor(locator, waitTimeout);
+    await this.waitForVisible(locator, waitTimeout);
     return this.driver.findElement(locator).click();
   }
 
@@ -46,12 +47,19 @@ class BasePage{
     return location;
   }
 
+
   async getDisplayedText(locator, timeout){
     var waitTimeout = timeout || 10000;
-    await this.waitFor(locator, waitTimeout);
+    await this.waitForVisible(locator, waitTimeout);
     var element = await this.driver.findElement(locator, waitTimeout);
     var currentText = await element.getText().then((text) => {return text;});
     return currentText;
+  }
+
+  async titleIsEqual(expectedTitle){
+    var title = await this.driver.getTitle();
+    return title == expectedTitle;
+
   }
 
 }
