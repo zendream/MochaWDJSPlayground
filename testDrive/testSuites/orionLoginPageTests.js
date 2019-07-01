@@ -26,7 +26,7 @@ describe('login tests', () =>{
         currURL = await driver.getCurrentUrl();
         
         console.log(currURL);
-        expect(currUrl).to.equal(subsURL);
+        expect(currURL).to.equal(subsURL);
       }
       finally{
         driver.quit()
