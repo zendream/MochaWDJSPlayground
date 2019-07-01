@@ -13,6 +13,7 @@ describe('login tests', () =>{
   describe('happy path login tests', () => {
     const mainURL = 'https://ci-orion-dev5-orionblitzcdn.clinicalink.com';
     const mainTimeout = 10000;
+    const subsURL = mainURL + '/subscriber'
     itParam("Should go to the orion platform login page and login successfully - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
       try{
@@ -25,7 +26,7 @@ describe('login tests', () =>{
         currURL = await driver.getCurrentUrl();
         
         console.log(currURL);
-        //expect(currUrl).to.equal(mainURL);
+        expect(currUrl).to.equal(subsURL);
       }
       finally{
         driver.quit()
