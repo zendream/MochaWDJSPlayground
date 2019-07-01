@@ -12,9 +12,10 @@ class LoginPage extends BasePage{
         //locator for username input bar
         password: By.id('password'),
 
-        loginButton: By.xpath('//*[@id="login"]/button/i'),
+        loginButton: By.id('loginButton'),
 
-        logoutButton: By.xpath('//*[@id="content"]/div/a/i'),
+        forgotPassworsButton: By.id('forgotLink'),
+        addSubbButton: By.id('add_subscriber')
     }
   }
 
@@ -23,15 +24,15 @@ class LoginPage extends BasePage{
     return this.driver.findElement(locator).sendKeys(message);
   }
 
-  async login(name, password){
-    await this.fillForm(this.locators.username, 10000, name);
-    await this.fillForm(this.locators.password, 10000, password);
-    return this.clickIfClickable(this.locators.loginButton,10000);
+  async login(name, password, timeout){
+    await this.fillForm(this.locators.username, timeout, name);
+    await this.fillForm(this.locators.password, timeout, password);
+    return this.clickIfClickable(this.locators.loginButton, timeout);
   }
 
-  async logout(){
-      //await this.waitFor(this.locators.logoutButton, 10000);
-      return this.clickIfClickable(this.locators.logoutButton,10000);
+  async logout(timeout){
+      await this.waitFor(this.locators.logoutButton, timeout);
+      return this.clickIfClickable(this.locators.logoutButton, timeout);
   }
 
   async titleIsEqual(expectedTitle){
