@@ -19,6 +19,7 @@ describe('Orion QA1 system admin login tests', () =>{
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
       try{
         this.loginPage = new LoginPage(driver, mainURL);
+        await this.loginPage.waitForElements(this.loginPage.locators, mainTimeout);
         await this.loginPage.open();
         await this.loginPage.waitToLoad();
         var currURL =  await this.loginPage.login('jdryer', 'Jdryer01!',mainTimeout).then( () => {
