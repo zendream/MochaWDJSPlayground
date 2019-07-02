@@ -45,14 +45,14 @@ function runTests(paths) {
 
       }
   });
+ 
   // test specification files from directory
   paths.forEach(function(path) {
       mocha.addFile(path);
   });
-  var i;
-  for(i = 0; i< 1; i++){
+  
   mocha.run(function(failures) {
     process.exitCode = failures ? 1 : 0;  //non-zero iff failure
   });
-  }
+
 }
