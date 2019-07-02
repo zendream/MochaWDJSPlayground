@@ -7,16 +7,12 @@ class LoginPage extends BasePage{
     super(webdriver, url)
     //array of locators on particular page(here it is login page)
     this.locators = {
-        //locator for username input bar
         username: By.id('username'),
-        //locator for username input bar
         password: By.id('password'),
-
         loginButton: By.id('loginButton'),
-
         forgotPassworsButton: By.id('forgotLink'),
         addSubbButton: By.id('add_subscriber'),
-        errorDetails: By.xpath("//div[@class='errorDetails']")
+        errorDetails: By.xpath("//div[@class='errorDetails']"),
     }
   }
 
@@ -29,11 +25,6 @@ class LoginPage extends BasePage{
     await this.fillForm(this.locators.username, timeout, name);
     await this.fillForm(this.locators.password, timeout, password);
     return this.clickIfClickable(this.locators.loginButton, timeout);
-  }
-
-  async logout(timeout){
-      await this.waitForVisible(this.locators.logoutButton, timeout);
-      return this.clickIfClickable(this.locators.logoutButton, timeout);
   }
 
   async getVisibleError(timeout){
