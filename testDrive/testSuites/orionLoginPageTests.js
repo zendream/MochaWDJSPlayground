@@ -20,6 +20,7 @@ describe('Orion QA1 system admin login tests', () =>{
       try{
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
+        await this.loginPage.waitToLoad();
         var currURL =  await this.loginPage.login('jdryer', 'Jdryer01!',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -41,6 +42,7 @@ describe('Orion QA1 system admin login tests', () =>{
       try {
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
+        await this.loginPage.waitToLoad();
         var currURL =  await this.loginPage.login('', '',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -59,6 +61,7 @@ describe('Orion QA1 system admin login tests', () =>{
       try {
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
+        await this.loginPage.waitToLoad();
         var currURL =  await this.loginPage.login('asdfg', '',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -77,6 +80,7 @@ describe('Orion QA1 system admin login tests', () =>{
       try {
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
+        await this.loginPage.waitToLoad();
         var currURL =  await this.loginPage.login('jdryer', '',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -95,6 +99,7 @@ describe('Orion QA1 system admin login tests', () =>{
       try {
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
+        await this.loginPage.waitToLoad();
         var currURL =  await this.loginPage.login('jdryer', 'asdfg',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );

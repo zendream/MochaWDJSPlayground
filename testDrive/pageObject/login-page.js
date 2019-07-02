@@ -37,5 +37,9 @@ class LoginPage extends BasePage{
     return expect(title).to.equal(expectedTitle);
 
   }
+
+  async waitToLoad(){
+    return this.waitForLocated(this.locators.loginButton, 10000);
+  }
 }
 module.exports = LoginPage;
