@@ -50,7 +50,7 @@ function runTests(paths) {
       mocha.addFile(path);
   });
   var i;
-  for(i = 0; i< 4; i++){
+  for(i = 0; i< 1; i++){
   mocha.run(function(failures) {
     process.exitCode = failures ? 1 : 0;  //non-zero iff failure
   });

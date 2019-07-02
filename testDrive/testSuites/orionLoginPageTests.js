@@ -112,5 +112,27 @@ describe('Orion QA1 system admin login tests', () =>{
         driver.quit();
       }
     });
+    itParam("show too many attempts error ? when login unsuccessfully many times", configs, async (config) => {
+      const driver = buildDriver(config.browser, config.height, config.width, config.headless);
+      var errorDetails;
+      var numOfAttempts = 100;
+      try{
+        this.loginPage = new LoginPage(driver, mainURL);
+        await this.loginPage.open();
+        await this.loginPage.waitToLoad();
+        for(var i = 0; i < numOfAttempts; i++){
+          var currURL =  await this.loginPage.login('jdryer', '',mainTimeout).then( () => {
+            return driver.getCurrentUrl();});
+        errorDetails = await this.loginPage.getVisibleError(mainTimeout);
+        expect(currURL).to.equal(mainURL);
+        expect(errorDetails).to.equal("Incorrect username or password.");
+        }
+      }
+      finally{
+        driver.quit();
+      }
+    });
+
+
   });
 });

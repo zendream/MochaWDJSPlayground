@@ -11,7 +11,6 @@ class LoginPage extends BasePage{
         password: By.id('password'),
         loginButton: By.id('loginButton'),
         forgotPassworsButton: By.id('forgotLink'),
-        addSubbButton: By.id('add_subscriber'),
         errorDetails: By.xpath("//div[@class='errorDetails']"),
     }
   }
