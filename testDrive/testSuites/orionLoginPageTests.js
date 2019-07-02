@@ -19,9 +19,9 @@ describe('Orion QA1 system admin login tests', () =>{
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
       try{
         this.loginPage = new LoginPage(driver, mainURL);
-        await this.loginPage.waitForElements(this.loginPage.locators, mainTimeout);
+       await this.loginPage.waitForElements(this.loginPage.locators, mainTimeout);
         await this.loginPage.open();
-        await this.loginPage.waitToLoad();
+        await this.loginPage.waitForRequiredElements();
         var currURL =  await this.loginPage.login('jdryer', 'Jdryer01!',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -36,6 +36,7 @@ describe('Orion QA1 system admin login tests', () =>{
     });
 
   });
+  /*
   describe('unhappy path login should', () => {
     itParam("show expected error with no user/pass - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
@@ -115,4 +116,5 @@ describe('Orion QA1 system admin login tests', () =>{
     });
 
   });
+  */
 });

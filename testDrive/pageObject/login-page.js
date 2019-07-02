@@ -5,7 +5,7 @@ var BasePage = require('./base-page');
 class LoginPage extends BasePage{
   constructor(webdriver, url){
     super(webdriver, url)
-    //array of locators on particular page(here it is login page)
+    
     this.locators = {
         username: By.id('username'),
         password: By.id('password'),
@@ -14,11 +14,13 @@ class LoginPage extends BasePage{
         errorDetails: By.xpath("//div[@class='errorDetails']"),
     }
   }
-
+  
   async fillForm(locator, timeout, message){
     await this.waitForVisible(locator,timeout);
     return this.driver.findElement(locator).sendKeys(message);
   }
+  //mandatory elements
+  
 
   async login(name, password, timeout){
     await this.fillForm(this.locators.username, timeout, name);
@@ -37,8 +39,15 @@ class LoginPage extends BasePage{
 
   }
 
-  async waitToLoad(){
-    return this.waitForLocated(this.locators.loginButton, 10000);
+  async waitForRequiredElements(){
+    //array of locators on particular page(here it is login page)
+    var requiredLocators = [];
+    requiredLocators.push(this.locators.username);
+    requiredLocators.push(this.locators.password);
+    requiredLocators.push(this.locators.loginButton);
+    requiredLocators.push(this.locators.forgotPassworsButton);
+
+    await this.waitForElements(requiredLocators);
   }
 }
 module.exports = LoginPage;

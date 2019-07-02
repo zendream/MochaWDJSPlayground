@@ -19,7 +19,7 @@ class BasePage{
 
   async waitForVisible(locator, timeout){
     var waitTimeout = timeout || this.pageTimeout;
-    return this.driver.wait(until.elementIsVisible(this.driver.findElement(locator, timeout), waitTimeout));
+    return this.driver.wait(until.elementIsVisible(this.driver.findElement(locator, waitTimeout), waitTimeout));
   }
 
   async waitForLocated(locator, timeout){
@@ -47,7 +47,6 @@ class BasePage{
     return location;
   }
 
-
   async getDisplayedText(locator, timeout){
     var waitTimeout = timeout || this.pageTimeout;
     await this.waitForVisible(locator, waitTimeout);
@@ -61,11 +60,11 @@ class BasePage{
     return title == expectedTitle;
 
   }
-  //problem with elements that are not present on default like login error message
-  async waitForElements(locators, timeout){
-    await Object.keys(locators).forEach(key => {
-      await this.waitForVisible(`${locators[key]}`, this.pageTimeout);
-    })
+  
+  async waitForElements(locators){
+    for(var i = 0 ; i < locators.length ; i++){
+      await this.waitForVisible(locators[i], this.pageTimeout); 
+    }
   }
 
 }
