@@ -4,11 +4,12 @@
       "orionLoginPageTests.js"
     ],
     "browsers": [
-      "chrome"
+      "chrome",
+      "firefox"
     ],
     "resolutions": [
       {
-        "height": 1900,
+        "height": 1920,
         "width": 1080
       }
     ],

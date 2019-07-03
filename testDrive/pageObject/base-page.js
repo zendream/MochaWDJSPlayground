@@ -4,7 +4,6 @@ class BasePage{
   constructor(webdriver,url) {
     this.driver = webdriver;
     this.url = url;
-    this.pageTimeout = 10000;
   }
 
   async open(){
@@ -61,10 +60,17 @@ class BasePage{
 
   }
   
-  async waitForElements(locators){
+  async waitForElements(locators, timeout){
+    /*
     for(var i = 0 ; i < locators.length ; i++){
-      await this.waitForVisible(locators[i], this.pageTimeout); 
+      await this.waitForVisible(locators[i], timeout); 
     }
+    */
+
+   await locators.forEach((locator) => {
+     return this.waitForVisible(locator, timeout);
+   });
+   
   }
 
 }

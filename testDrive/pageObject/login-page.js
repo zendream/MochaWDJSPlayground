@@ -13,6 +13,8 @@ class LoginPage extends BasePage{
         forgotPassworsButton: By.id('forgotLink'),
         errorDetails: By.xpath("//div[@class='errorDetails']"),
     }
+    
+    this.pageTimeout = 10000;
   }
   
   async fillForm(locator, timeout, message){
@@ -46,8 +48,11 @@ class LoginPage extends BasePage{
     requiredLocators.push(this.locators.password);
     requiredLocators.push(this.locators.loginButton);
     requiredLocators.push(this.locators.forgotPassworsButton);
-
-    await this.waitForElements(requiredLocators);
+    
+    await this.waitForElements(requiredLocators, this.pageTimeout);
+        
   }
+    
+
 }
 module.exports = LoginPage;

@@ -19,9 +19,9 @@ describe('Orion QA1 system admin login tests', () =>{
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
       try{
         this.loginPage = new LoginPage(driver, mainURL);
-       await this.loginPage.waitForElements(this.loginPage.locators, mainTimeout);
-        await this.loginPage.open();
-        await this.loginPage.waitForRequiredElements();
+        await this.loginPage.open().then(()=>{ this.loginPage.waitForRequiredElements();});
+        //await this.loginPage.waitForRequiredElements();
+        
         var currURL =  await this.loginPage.login('jdryer', 'Jdryer01!',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -29,6 +29,7 @@ describe('Orion QA1 system admin login tests', () =>{
         await this.loginPage.waitForLocated(this.dashboardPage.locators.addSubbButton, mainTimeout);
         currURL = await driver.getCurrentUrl();
         expect(currURL).to.equal(this.dashboardPage.url);
+        
       }
       finally{
         driver.quit();
@@ -36,15 +37,16 @@ describe('Orion QA1 system admin login tests', () =>{
     });
 
   });
-  /*
+  
   describe('unhappy path login should', () => {
     itParam("show expected error with no user/pass - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
       var errorDetails;
       try {
         this.loginPage = new LoginPage(driver, mainURL);
-        await this.loginPage.open();
-        await this.loginPage.waitToLoad();
+        await this.loginPage.open().then(()=>{ this.loginPage.waitForRequiredElements();});
+       // await this.loginPage.waitForRequiredElements();
+       
         var currURL =  await this.loginPage.login('', '',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -52,6 +54,7 @@ describe('Orion QA1 system admin login tests', () =>{
         errorDetails = await this.loginPage.getVisibleError(mainTimeout);
         expect(currURL).to.equal(mainURL);
         expect(errorDetails).to.equal("Missing required parameter USERNAME");
+        
       }
       finally{
         driver.quit();
@@ -62,8 +65,9 @@ describe('Orion QA1 system admin login tests', () =>{
       var errorDetails;
       try {
         this.loginPage = new LoginPage(driver, mainURL);
-        await this.loginPage.open();
-        await this.loginPage.waitToLoad();
+        await this.loginPage.open().then(()=>{ this.loginPage.waitForRequiredElements();});
+        //await this.loginPage.waitForRequiredElements();
+        
         var currURL =  await this.loginPage.login('asdfg', '',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -71,18 +75,20 @@ describe('Orion QA1 system admin login tests', () =>{
         errorDetails = await this.loginPage.getVisibleError(mainTimeout);
         expect(currURL).to.equal(mainURL);
         expect(errorDetails).to.equal("User does not exist.");
+        
       }
       finally{
         driver.quit();
       }
     });
+    
     itParam("show expected error when submitted without any password - ${value.browser}_${value.height}*${value.width}", configs, async (config) => {
       const driver = buildDriver(config.browser, config.height, config.width, config.headless);
       var errorDetails;
       try {
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
-        await this.loginPage.waitToLoad();
+        await this.loginPage.waitForRequiredElements();
         var currURL =  await this.loginPage.login('jdryer', '',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -101,7 +107,7 @@ describe('Orion QA1 system admin login tests', () =>{
       try {
         this.loginPage = new LoginPage(driver, mainURL);
         await this.loginPage.open();
-        await this.loginPage.waitToLoad();
+        await this.loginPage.waitForRequiredElements();
         var currURL =  await this.loginPage.login('jdryer', 'asdfg',mainTimeout).then( () => {
             return driver.getCurrentUrl();}
         );
@@ -116,5 +122,5 @@ describe('Orion QA1 system admin login tests', () =>{
     });
 
   });
-  */
+  
 });
