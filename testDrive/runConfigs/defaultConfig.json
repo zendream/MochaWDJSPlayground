@@ -4,8 +4,7 @@
       "orionLoginPageTests.js"
     ],
     "browsers": [
-      "chrome",
-      "firefox"
+      "chrome"
     ],
     "resolutions": [
       {

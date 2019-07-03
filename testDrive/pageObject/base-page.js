@@ -59,18 +59,26 @@ class BasePage{
     return title == expectedTitle;
 
   }
-  
-  async waitForElements(locators, timeout){
-    /*
-    for(var i = 0 ; i < locators.length ; i++){
-      await this.waitForVisible(locators[i], timeout); 
-    }
-    */
 
-   await locators.forEach((locator) => {
-     return this.waitForVisible(locator, timeout);
-   });
-   
+  async waitForElements(locators, timeout){
+    var promises = []
+     locators.forEach((locator) => {
+       promises.push(this.waitForVisible(locator, timeout).then(
+         function(element){
+           //console.log('Element found');
+         }, function (err) {
+           //console.log(err);
+         }
+       ));
+     });
+     Promise.all(promises).then(
+       function(){
+         //console.log('All required elements found');
+       }, function(err) {
+         //console.log(err);
+       }
+     )
+
   }
 
 }
